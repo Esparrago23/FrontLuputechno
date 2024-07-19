@@ -16,34 +16,37 @@ function SecionLogin() {
     const handleClick = async (e) => {
         e.preventDefault();
         setError(null);
-        console.log("usuario:", email);
-        console.log("Password:", password);
-
         try {
-            const response = await fetch('https://lupultechnoapi.integrador.xyz/api/auth/login', {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/auth/login`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type':'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Authorization': sessionStorage.getItem('token')
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': sessionStorage.getItem('token')
                 },
-                body: JSON.stringify({ "username": email,"password":password })
+                body: JSON.stringify({ "username": email, "password": password })
             });
-            console.log(sessionStorage.getItem('token'))
+    
             if (!response.ok) {
                 throw new Error('Error en la autenticación');
             }
-            
-            const data = await response.json();
-            setToken(data);
-            sessionStorage.setItem('token', JSON.stringify(data));
-            console.log(sessionStorage.getItem('token'))
-            
+    
+            const authorizationHeader = response.headers.get('Authorization');
+    
+            if (authorizationHeader) {
+                setToken(authorizationHeader);
+                sessionStorage.setItem('token', authorizationHeader);
+                console.log('Token stored:', sessionStorage.getItem('token'));
+                
+            } else {
+                throw new Error('No authorization token received');
+            }
         } catch (error) {
             setError(error.message);
+            console.error('Authentication error:', error);
         }
-        
-    }
+        navigate("/Principal");
+    };
     useEffect(() => {
         if (token) {
             navigate("/Principal");

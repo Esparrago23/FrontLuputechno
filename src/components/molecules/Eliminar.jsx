@@ -1,13 +1,13 @@
 
 import Input from '../atoms/Input'
 
-const Eliminar = ({ title, type, placeholder, onInputChange }) => (
+const Eliminar = ({ title, type, placeholder, onchange }) => (
   <div>
     <h2>{title}</h2>
     <Input
       type={type}
       placeholder={placeholder}
-      onChange={onInputChange}
+      onchange={onchange}
     />
   </div>
 );

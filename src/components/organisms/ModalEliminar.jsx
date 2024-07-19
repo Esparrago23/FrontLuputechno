@@ -39,6 +39,7 @@ const ModalEliminar = ({ currentPage, onCancel }) => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    console.log(inputValue)
   };
 
   const handleEliminarClick = () => {
@@ -64,15 +65,14 @@ const ModalEliminar = ({ currentPage, onCancel }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${import.meta.env.VITE_URL_API}/${apiEndpoint}`, {
+        console.log(inputValue)
+        fetch(`${import.meta.env.VITE_URL_API}/${apiEndpoint}/${inputValue}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
+            'Authorization':  sessionStorage.getItem('token')
           },
-          body: JSON.stringify({
-            NumeroEconomico: inputValue,
-          }),
         })
           .then((response) => {
             if (response.ok) {
@@ -130,7 +130,7 @@ const ModalEliminar = ({ currentPage, onCancel }) => {
         <Eliminar
           type="text"
           placeholder={placeholder}
-          onInputChange={handleInputChange}
+          onchange={setInputValue}
           value={inputValue}
         ></Eliminar>
       </div>

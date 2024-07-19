@@ -40,31 +40,34 @@ function SectionMotos() {
     deleteModalRef.current.close();
   };
 
-  const seeVehiculos = async (e) => {
-    const storedData = sessionStorage.getItem('token'); // Obtener la cadena JSON
-const data = storedData ? JSON.parse(storedData) : null; // Convertir la cadena de nuevo a un objeto
-console.log(data); 
-console.log(data.token)
-    e.preventDefault();
+  const seeVehiculos = async () => {
     try {
-      const response = await fetch('https://lupultechnoapi.integrador.xyz/api/Vehiculos', {
-          method: 'GET',
-          headers: {
-              'Content-Type':'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Authorization': data.token
-          }
-      });
-      if (!response.ok) {
-        throw new Error('Error en la autenticación');
+        const token = sessionStorage.getItem('token');
+        console.log(token)
+        if (!token) {
+            throw new Error('No token found');
+        }
+
+        const response = await fetch(`${import.meta.env.VITE_URL_API}/Vehiculos`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Authorization': token
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error fetching vehiculos');
+        }
+
+        const data = await response.json();
+        console.log('Vehiculos data:', data);
+        
+    } catch (error) {
+        console.error('Fetch vehiculos error:', error);
     }
-      const data = await response.json();
-      console.log(data)
-      
-  } catch (error) {
-      setError(error.message);
-  }
-  };
+};
 
   const handleAddVehiculoMoto = () => {
     // Simulación de llamada a la API
