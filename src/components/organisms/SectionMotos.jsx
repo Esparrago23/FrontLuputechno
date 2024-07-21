@@ -7,6 +7,7 @@ import ModalEliminar from "./ModalEliminar";
 import Button_icons from "../atoms/Button_icons";
 import Img from "../atoms/Img";
 import FormularioEditar from "../molecules/FormularioEditar";
+import Button from "../atoms/Button";
 //depuracion de codigo, codigo repetido sweetalert
 
 function SectionMotos() {
@@ -121,11 +122,9 @@ const handleEditVehiculoMoto = () => {
         </div>
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Principal onClick={openModal} image={"/Moto.png"} text="Añadir." />
-          <Principal
-            image={"/Moto.png"}
+          <Button image={"/Moto.png"}
             text="Visualizar"
-            onClick={seeVehiculos}
-          />
+            onClick={seeVehiculos}/>
           <Principal
             onClick={openEditModal}
             image={"/pen-svgrepo-com(2).svg"}

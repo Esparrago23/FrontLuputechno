@@ -12,6 +12,9 @@ import SectionDiesel from './components/organisms/SectionDiesel.jsx';
 import SectionComodato from './components/organisms/SectionComodato.jsx';
 import MenuMantenimiento from './Pages/MenuMantenimiento.jsx';
 import { Navigate } from 'react-router-dom';
+import Tablas from './components/atoms/Tabla.jsx';
+import Homeusuario from './Pages/Homeusuario.jsx';
+import MenuMantenimientoUsuario from './Pages/MenuMantenimientoUsuario.jsx';
 const isAuthenticated = () => {
   return sessionStorage.getItem('token') !== null;
 };
@@ -34,7 +37,10 @@ const router = createBrowserRouter([
       { path: "Comodato", element: <PrivateRoute element={<SectionComodato />} /> } // Ruta hija protegida
     ],
   },
-  { path: "/MenuMantenimiento", element: <PrivateRoute element={<MenuMantenimiento />} /> }
+  { path: "/MenuMantenimiento", element: <PrivateRoute element={<MenuMantenimiento />} /> },
+  {path: "/Tablas", element:<PrivateRoute element={<Tablas/>}/>},
+  {path:"/PrincipalUsuario",element:<PrivateRoute element={<Homeusuario/>}/>},
+  {path:"/MenuMantenimientoUsuarios",element:<PrivateRoute element={<MenuMantenimientoUsuario/>}/>}
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

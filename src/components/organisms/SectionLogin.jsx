@@ -32,6 +32,15 @@ function SecionLogin() {
             }
     
             const authorizationHeader = response.headers.get('Authorization');
+            const info= await response.json()
+             
+             if(info.id==8){
+                console.log("es un int")
+                navigate("/Principal");
+             }else{
+                navigate("/PrincipalUsuario");
+             }
+            console.log( info.id);
     
             if (authorizationHeader) {
                 setToken(authorizationHeader);
@@ -45,13 +54,9 @@ function SecionLogin() {
             setError(error.message);
             console.error('Authentication error:', error);
         }
-        navigate("/Principal");
+        
     };
-    useEffect(() => {
-        if (token) {
-            navigate("/Principal");
-        }
-    }, [token, navigate]);
+    
 
     return (
         <form>
