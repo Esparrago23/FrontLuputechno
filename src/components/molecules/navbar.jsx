@@ -19,6 +19,12 @@ function Navbar() {
     sessionStorage.removeItem('token');
     navigate("/"); // redirige al usuario a la página de login o cualquier otra página
 };
+const navigateToResguardante = () => {
+  navigate("/Resguardantes"); // redirige al usuario a la página de login o cualquier otra página
+};
+const navigateToMantenimientos = () => {
+  navigate("/MenuMantenimiento"); // redirige al usuario a la página de login o cualquier otra página
+};
 
   return (
     <div className="bg-azulIntegrador">
@@ -31,7 +37,7 @@ function Navbar() {
             </Button_icons>
           </li>
           <li className="font-normal text-white bg-red-700 bg-oratext-base">
-            <Button
+            <Button onClick={navigateToResguardante}
               title="Resguardante"
             />
           </li>
@@ -45,7 +51,7 @@ function Navbar() {
             />
           </li>
           <li className="text-base font-normal text-white bg-red-700">
-            <Button
+            <Button onClick={navigateToMantenimientos}
               title="Mantenimiento"
             />
           </li>

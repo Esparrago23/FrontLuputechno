@@ -6,15 +6,16 @@ import Home from './Pages/Home.jsx';
 import './index.css';
 import Vehicules from './Pages/Vehicules.jsx';
 import MenuVehiculos from './Pages/MenuVehiculos.jsx';
-import SectionGasolina from './components/organisms/SectionGasolina.jsx';
-import SectionDiesel from './components/organisms/SectionDiesel.jsx';
-import SectionComodato from './components/organisms/SectionComodato.jsx';
 import MenuMantenimiento from './Pages/MenuMantenimiento.jsx';
 import { Navigate } from 'react-router-dom';
 import Tablas from './components/atoms/Tabla.jsx';
 import Homeusuario from './Pages/Homeusuario.jsx';
 import MenuMantenimientoUsuario from './Pages/MenuMantenimientoUsuario.jsx';
 import MenuMotos from './components/organisms/MenuMotos.jsx';
+import MenuGasolina from './components/organisms/MenuGasolina.jsx';
+import MenuDiesel from './components/organisms/MenuDiesel.jsx';
+import MenuComodatos from './components/organisms/MenuComodatos.jsx';
+import MenuResguardantes from './Pages/MenuResguardante.jsx';
 const isAuthenticated = () => {
   return sessionStorage.getItem('token') !== null;
 };
@@ -27,14 +28,15 @@ const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/Principal", element: <PrivateRoute element={<Home />} /> },
   { path: "/MenuVehiculos", element: <PrivateRoute element={<MenuVehiculos />} /> },
+  { path: "/Resguardantes", element: <PrivateRoute element={<MenuResguardantes />} /> },
   {
     path: "/Vehicules",
     element: <PrivateRoute element={<Vehicules />} />, // Vehicules como layout protegido
     children: [
-      { path: "Gasolina", element: <PrivateRoute element={<SectionGasolina />} /> }, // Ruta hija protegida
+      { path: "Gasolina", element: <PrivateRoute element={<MenuGasolina />} /> }, // Ruta hija protegida
       { path: "Motos", element: <PrivateRoute element={<MenuMotos />} /> },
-      { path: "Diesel", element: <PrivateRoute element={<SectionDiesel />} /> },
-      { path: "Comodato", element: <PrivateRoute element={<SectionComodato />} /> } // Ruta hija protegida
+      { path: "Diesel", element: <PrivateRoute element={<MenuDiesel />} /> },
+      { path: "Comodato", element: <PrivateRoute element={<MenuComodatos />} /> } // Ruta hija protegida
     ],
   },
   { path: "/MenuMantenimiento", element: <PrivateRoute element={<MenuMantenimiento />} /> },
