@@ -8,8 +8,13 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handlerClick = (e) => {
-    navigate("/");
+    navigate(e);
   };
+  const handleChange = (e) => {
+    const selectedPage = e.target.value;
+    handlerClick(selectedPage)
+  };
+
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     navigate("/"); // redirige al usuario a la página de login o cualquier otra página
@@ -20,6 +25,7 @@ function Navbar() {
       <nav className="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl sm:px-6 md:px-8">
         <ul className="flex flex-col items-center justify-between w-full space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:space-x-8">
           <li className="bg-green-500" >
+          
             <Button_icons className="w-1/2 font-normal bg-white rounded-full">
               <Img image="/Logo.png" alt="Logo" />
             </Button_icons>
@@ -30,12 +36,12 @@ function Navbar() {
             />
           </li>
           <li className="text-base font-normal text-white bg-red-700">
-            <SelectNavbar
-              opcion5="Vehiculo"
-              opcion1="Gasolina: Vehiculo"
-              opcion2="Diesel: Vehiculo"
-              opcion3="Motos: Vehiculo"
-              opcion4="Comodatos: Vehiculo"
+            <SelectNavbar OnChange={handleChange}
+              opcion5="Vehiculo" value5={"/MenuVehiculos"}
+              opcion1="Gasolina: Vehiculo" value1={"/Vehicules/Gasolina"}
+              opcion2="Diesel: Vehiculo" value2={"/Vehicules/Diesel"}
+              opcion3="Motos: Vehiculo" value3={"/Vehicules/Motos"}
+              opcion4="Comodatos: Vehiculo" value4={"/Vehicules/Comodato"}
             />
           </li>
           <li className="text-base font-normal text-white bg-red-700">

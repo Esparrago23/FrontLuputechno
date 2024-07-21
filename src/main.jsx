@@ -7,7 +7,6 @@ import './index.css';
 import Vehicules from './Pages/Vehicules.jsx';
 import MenuVehiculos from './Pages/MenuVehiculos.jsx';
 import SectionGasolina from './components/organisms/SectionGasolina.jsx';
-import SectionMotos from './components/organisms/SectionMotos.jsx';
 import SectionDiesel from './components/organisms/SectionDiesel.jsx';
 import SectionComodato from './components/organisms/SectionComodato.jsx';
 import MenuMantenimiento from './Pages/MenuMantenimiento.jsx';
@@ -15,6 +14,7 @@ import { Navigate } from 'react-router-dom';
 import Tablas from './components/atoms/Tabla.jsx';
 import Homeusuario from './Pages/Homeusuario.jsx';
 import MenuMantenimientoUsuario from './Pages/MenuMantenimientoUsuario.jsx';
+import MenuMotos from './components/organisms/MenuMotos.jsx';
 const isAuthenticated = () => {
   return sessionStorage.getItem('token') !== null;
 };
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <PrivateRoute element={<Vehicules />} />, // Vehicules como layout protegido
     children: [
       { path: "Gasolina", element: <PrivateRoute element={<SectionGasolina />} /> }, // Ruta hija protegida
-      { path: "Motos", element: <PrivateRoute element={<SectionMotos />} /> },
+      { path: "Motos", element: <PrivateRoute element={<MenuMotos />} /> },
       { path: "Diesel", element: <PrivateRoute element={<SectionDiesel />} /> },
       { path: "Comodato", element: <PrivateRoute element={<SectionComodato />} /> } // Ruta hija protegida
     ],
