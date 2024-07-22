@@ -22,6 +22,7 @@ import VizualizarComodato from './Pages/VizualizarComodato.jsx';
 import VizualizarDiesel from './Pages/VizualizarDiesel.jsx';
 import VizualizarMantenimientos from './Pages/VizualizarMantenimientos.jsx';
 import VizualizarResguardantes from './Pages/VizualizarResguardantes.jsx';
+import RegisterUser from './Pages/RegisterUser.jsx';
 const isAuthenticated = () => {
   return sessionStorage.getItem('token') !== null;
 };
@@ -32,6 +33,7 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
+  {path:"/Register",element:<RegisterUser/>},
   { path: "/Principal", element: <PrivateRoute element={<Home />} /> },
   { path: "/MenuVehiculos", element: <PrivateRoute element={<MenuVehiculos />} /> },
   { path: "/Resguardantes", element: <PrivateRoute element={<MenuResguardante />} /> },

@@ -1,6 +1,8 @@
-import SectionLogin from "../components/organisms/SectionLogin";
+
+
+import Register from "../components/organisms/Register";
 import Img from "../components/atoms/Img";
-function Login() {
+function RegisterUser() {
     return(
         <>
         <div className=" border-solid bg-gradient-to-b h-[100vh] flex justify-center items-center bg-azullogin ">
@@ -9,13 +11,14 @@ function Login() {
                 <Img image="Logo.png"></Img>
             </div>
             <div className="h-3/6">
-            <div>
-                <SectionLogin></SectionLogin>
-            </div>
+                <div>
+                    <Register></Register>
+                </div>
+                
             </div>
         </div>
         </div>
         </>
     )
 }
-export default Login
+export default RegisterUser;
