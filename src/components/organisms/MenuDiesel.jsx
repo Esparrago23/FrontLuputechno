@@ -6,18 +6,18 @@ import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
 import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
 import BotonMenu from '../molecules/BotonMenu';
-
+import { useNavigate } from "react-router-dom";
 const MySwal = withReactContent(Swal);
 
 function MenuDiesel() {
     const inputValueRef = useRef('');
     const formRef = useRef({});
     const [form, setForm] = useState({});
-
+    const navigate = useNavigate();
     const handlerClickA = () => {
         MySwal.fire({
             title: 'Ingresa los datos',
-            html: <FormularioVehiculos onChange={(values) => (formRef.current = values)} tipoVehiculo="Gasolina"/>,
+            html: <FormularioVehiculos onChange={(values) => (formRef.current = values)} tipoVehiculo="Diesel"/>,
             showCloseButton: true,
             confirmButtonText: 'Agregar',
             preConfirm: () => {
@@ -175,23 +175,9 @@ function MenuDiesel() {
             }
         });
     };
-    const handlerClickV = async () =>{
-        const response = await fetch(`${import.meta.env.VITE_URL_API}/Vehiculos`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Authorization': sessionStorage.getItem('token')
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Error fetching vehiculos');
-        }
-
-        const data = await response.json();
-        console.log('Vehiculos data:', data);
-    }
+    const NavigateToVizualizar =  () =>{
+        navigate("/VerDiesel"); // redirige al usuario a la página de login o cualquier otra página
+};
 
     return (
         <div className="mt-16">
@@ -200,7 +186,7 @@ function MenuDiesel() {
             </div>
             <div className="bg-slate-200 flex justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2 mt-16">
                 <BotonMenu title={"Añadir"} image={"/Diesel.png"} onClick={handlerClickA} />
-                <BotonMenu title={"Visualizar"} image={"/Diesel.png"} onClick={handlerClickV}/>
+                <BotonMenu title={"Visualizar"} image={"/Diesel.png"} onClick={NavigateToVizualizar}/>
                 <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
                 <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
             </div>

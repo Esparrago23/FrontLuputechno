@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Label from "../atoms/Label";
 import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
@@ -13,6 +14,7 @@ function MenuMotos() {
     const inputValueRef = useRef('');
     const formRef = useRef({});
     const [form, setForm] = useState({});
+    const navigate = useNavigate();
 
     const handlerClickA = () => {
         MySwal.fire({
@@ -175,23 +177,9 @@ function MenuMotos() {
             }
         });
     };
-    const handlerClickV = async () =>{
-        const response = await fetch(`${import.meta.env.VITE_URL_API}/Vehiculos`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Authorization': sessionStorage.getItem('token')
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Error fetching vehiculos');
-        }
-
-        const data = await response.json();
-        console.log('Vehiculos data:', data);
-    }
+    const NavigateToVizualizar =  () =>{
+            navigate("/VerMotos"); // redirige al usuario a la página de login o cualquier otra página
+    };
 
     return (
         <div className="mt-16">
@@ -200,7 +188,7 @@ function MenuMotos() {
             </div>
             <div className="bg-slate-200 flex justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2 mt-16">
                 <BotonMenu title={"Añadir"} image={"/Moto.png"} onClick={handlerClickA} />
-                <BotonMenu title={"Visualizar"} image={"/Moto.png"} onClick={handlerClickV}/>
+                <BotonMenu title={"Visualizar"} image={"/Moto.png"} onClick={NavigateToVizualizar}/>
                 <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
                 <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
             </div>

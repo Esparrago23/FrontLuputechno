@@ -1,13 +1,13 @@
 import Navbar from "../components/molecules/navbar";
-import SectionMenuResguardante from "../components/organisms/SectionMenuResguardante";
+import MenuResguardantes from "../components/organisms/MenuResguardantes";
 
-function MenuResguardantes() {
+function MenuResguardante() {
 return (
     <div>
         <Navbar/>
-        <SectionMenuResguardante/>
+        <MenuResguardantes/>
     </div>
 );
 }
 
-export default MenuResguardantes;
+export default MenuResguardante;

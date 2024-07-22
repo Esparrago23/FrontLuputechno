@@ -1,11 +1,11 @@
 import Navbar from "../components/molecules/navbar";
-import SectionMenuMantenimiento from "../components/organisms/SectionMenuMantenimiento";
+import MenuMantenimientos from "../components/organisms/MenuMantenimientos";
 
 function MenuMantenimiento() {
 return (
     <div>
         <Navbar/>
-        <SectionMenuMantenimiento/>
+        <MenuMantenimientos/>
     </div>
 );
 }

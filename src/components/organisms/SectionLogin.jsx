@@ -10,7 +10,6 @@ function SecionLogin() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const [token, setToken] = useState(sessionStorage.getItem('token'));
-    console.log(email)
     
 
     const handleClick = async (e) => {

@@ -6,19 +6,21 @@ import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
 import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
 import BotonMenu from '../molecules/BotonMenu';
+import FormularioMantenimientos from '../molecules/FormularioMantenimientos';
+import FormularioMantenimientosEditar from '../molecules/FormularioMantenimientosEditar';
 import { useNavigate } from "react-router-dom";
-
 const MySwal = withReactContent(Swal);
 
-function MenuComodatos() {
+function MenuMantenimientos() {
     const inputValueRef = useRef('');
     const formRef = useRef({});
     const [form, setForm] = useState({});
     const navigate = useNavigate();
+
     const handlerClickA = () => {
         MySwal.fire({
             title: 'Ingresa los datos',
-            html: <FormularioVehiculos onChange={(values) => (formRef.current = values)} tipoVehiculo="Comodato"/>,
+            html: <FormularioMantenimientos onChange={(values) => (formRef.current = values)} />,
             showCloseButton: true,
             confirmButtonText: 'Agregar',
             preConfirm: () => {
@@ -28,7 +30,7 @@ function MenuComodatos() {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
-                fetch(`${import.meta.env.VITE_URL_API}/Vehiculos`, {
+                fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -50,11 +52,11 @@ function MenuComodatos() {
 
     const handlerClickE =  () => {
         MySwal.fire({
-            title: 'Ingresa los datos del vehiculo',
+            title: 'Ingresa los datos del Mantenimiento',
             html: (
                 <FormularioBuscar
                     type="text"
-                    placeholder="No. económico"
+                    placeholder="No. Folio"
                     onChange={(value) => {
                         inputValueRef.current = value;
                     }}
@@ -64,13 +66,13 @@ function MenuComodatos() {
             confirmButtonText: 'Buscar',
             preConfirm: () => {
                 if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el No. económico');
+                    Swal.showValidationMessage('Por favor ingresa el No. Folio');
                     return false;
                 }
                 return inputValueRef.current;
             },
         }).then(async()  => {
-            const response = await fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento/${inputValueRef.current}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,13 +88,13 @@ function MenuComodatos() {
             console.log('Vehiculos data:', data.NumeroEconomico);
             MySwal.fire({
                 title: 'Ingresa los datos del Vehiculo',
-                html: <FormularioMotosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Gasolina" data={data}/>,
+                html: <FormularioMantenimientosEditar onChange={(values) => (formRef.current = values)}  data={data}/>,
                 showCloseButton: true,
                 confirmButtonText: 'Editar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
-                    fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
+                    fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento/${inputValueRef.current}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -123,11 +125,11 @@ function MenuComodatos() {
 
     const handlerClick = () => {
         MySwal.fire({
-            title: 'Ingresa los datos del vehiculo',
+            title: 'Ingresa los datos del Mantenimiento',
             html: (
                 <FormularioBuscar
                     type="text"
-                    placeholder="No. económico"
+                    placeholder="No. Folio"
                     onChange={(value) => {
                         inputValueRef.current = value;
                     }}
@@ -137,7 +139,7 @@ function MenuComodatos() {
             confirmButtonText: 'Eliminar',
             preConfirm: () => {
                 if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el No. económico');
+                    Swal.showValidationMessage('Por favor ingresa el No. Folio');
                     return false;
                 }
                 return inputValueRef.current;
@@ -145,7 +147,7 @@ function MenuComodatos() {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(inputValueRef.current);
-                fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
+                fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento/${inputValueRef.current}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -177,7 +179,7 @@ function MenuComodatos() {
         });
     };
     const NavigateToVizualizar =  () =>{
-        navigate("/VerComodato"); // redirige al usuario a la página de login o cualquier otra página
+        navigate("/VerMantenimientos"); // redirige al usuario a la página de login o cualquier otra página
 };
 
     return (
@@ -186,8 +188,8 @@ function MenuComodatos() {
                 <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
             </div>
             <div className="bg-slate-200 flex justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2 mt-16">
-                <BotonMenu title={"Añadir"} image={"/Comodato.png"} onClick={handlerClickA} />
-                <BotonMenu title={"Visualizar"} image={"/Comodato.png"} onClick={NavigateToVizualizar}/>
+                <BotonMenu title={"Añadir"} image={"/Papel2.png"} onClick={handlerClickA} />
+                <BotonMenu title={"Visualizar"} image={"/Papel.png"} onClick={NavigateToVizualizar}/>
                 <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
                 <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
             </div>
@@ -195,4 +197,4 @@ function MenuComodatos() {
     );
 }
 
-export default MenuComodatos;
+export default MenuMantenimientos;

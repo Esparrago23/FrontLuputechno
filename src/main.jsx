@@ -15,7 +15,13 @@ import MenuMotos from './components/organisms/MenuMotos.jsx';
 import MenuGasolina from './components/organisms/MenuGasolina.jsx';
 import MenuDiesel from './components/organisms/MenuDiesel.jsx';
 import MenuComodatos from './components/organisms/MenuComodatos.jsx';
-import MenuResguardantes from './Pages/MenuResguardante.jsx';
+import MenuResguardante from './Pages/MenuResguardante.jsx';
+import VizualizarVehiculos from './Pages/VizualizarVehiculos.jsx';
+import VizualizarGasolina from './Pages/VizualizarGasolina.jsx';
+import VizualizarComodato from './Pages/VizualizarComodato.jsx';
+import VizualizarDiesel from './Pages/VizualizarDiesel.jsx';
+import VizualizarMantenimientos from './Pages/VizualizarMantenimientos.jsx';
+import VizualizarResguardantes from './Pages/VizualizarResguardantes.jsx';
 const isAuthenticated = () => {
   return sessionStorage.getItem('token') !== null;
 };
@@ -28,7 +34,13 @@ const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/Principal", element: <PrivateRoute element={<Home />} /> },
   { path: "/MenuVehiculos", element: <PrivateRoute element={<MenuVehiculos />} /> },
-  { path: "/Resguardantes", element: <PrivateRoute element={<MenuResguardantes />} /> },
+  { path: "/Resguardantes", element: <PrivateRoute element={<MenuResguardante />} /> },
+  { path: "/VerMotos", element: <PrivateRoute element={<VizualizarVehiculos />} /> },
+  { path: "/VerGasolina", element: <PrivateRoute element={<VizualizarGasolina />} /> },
+  { path: "/VerComodato", element: <PrivateRoute element={<VizualizarComodato />} /> },
+  { path: "/VerDiesel", element: <PrivateRoute element={<VizualizarDiesel />} /> },
+  { path: "/VerMantenimientos", element: <PrivateRoute element={<VizualizarMantenimientos />} /> },
+  { path: "/VerResguardantes", element: <PrivateRoute element={<VizualizarResguardantes />} /> },
   {
     path: "/Vehicules",
     element: <PrivateRoute element={<Vehicules />} />, // Vehicules como layout protegido
