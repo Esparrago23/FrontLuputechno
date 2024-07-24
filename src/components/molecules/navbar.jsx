@@ -25,6 +25,13 @@ const navigateToResguardante = () => {
 const navigateToMantenimientos = () => {
   navigate("/MenuMantenimiento"); // redirige al usuario a la página de login o cualquier otra página
 };
+const navigateToPrincipal = () => {
+  navigate("/Principal"); // redirige al usuario a la página de login o cualquier otra página
+};
+const navigateToUsuarios = () => {
+  navigate("/Usuarios"); // redirige al usuario a la página de login o cualquier otra página
+};
+
 
   return (
     <div className="bg-azulIntegrador">
@@ -32,7 +39,7 @@ const navigateToMantenimientos = () => {
         <ul className="flex flex-col items-center justify-between w-full space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:space-x-8">
           <li className="bg-green-500" >
           
-            <Button_icons className="w-1/2 font-normal bg-white rounded-full">
+            <Button_icons onClick={navigateToPrincipal} className="w-1/2 font-normal bg-white rounded-full">
               <Img image="/Logo.png" alt="Logo" />
             </Button_icons>
           </li>
@@ -59,7 +66,7 @@ const navigateToMantenimientos = () => {
             <Button title="Bitacora" />
           </li>
           <li className="font-normal bg-red-700">
-            <Button className="font-normal text-white" title="Usuario" />
+            <Button onClick={navigateToUsuarios} className="font-normal text-white" title="Usuario" />
           </li>
           <li>
             <Button_icons onClick={handleLogout} className="text-base bg-green-600 ">

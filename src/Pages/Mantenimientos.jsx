@@ -1,7 +1,7 @@
 import Navbar from "../components/molecules/navbar";
 import MenuMantenimientos from "../components/organisms/MenuMantenimientos";
 
-function MenuMantenimiento() {
+function Mantenimientos() {
 return (
     <div>
         <Navbar/>
@@ -10,4 +10,4 @@ return (
 );
 }
 
-export default MenuMantenimiento;
+export default Mantenimientos;

@@ -1,7 +1,7 @@
 import Navbar from "../components/molecules/navbar";
 import MenuResguardantes from "../components/organisms/MenuResguardantes";
 
-function MenuResguardante() {
+function Resguardantes() {
 return (
     <div>
         <Navbar/>
@@ -10,4 +10,4 @@ return (
 );
 }
 
-export default MenuResguardante;
+export default Resguardantes;

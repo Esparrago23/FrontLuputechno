@@ -1,14 +1,14 @@
 
 import Navbar from "../components/molecules/navbar";
-import SectionPrincipal from "../components/organisms/SectionPrincipal";
+import MenuHome from "../components/organisms/MenuHome";
 
 
 
 function Home() {
     return(
         <>
-        <Navbar></Navbar>
-        <SectionPrincipal></SectionPrincipal>
+        <Navbar/>
+        <MenuHome/>
 
         </>
     );

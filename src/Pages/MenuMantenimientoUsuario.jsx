@@ -1,12 +1,12 @@
 import Navbarusuario from "../components/molecules/Navbarusuario"
-import SectionMenuMantenimiento from "../components/organisms/SectionMenuMantenimiento"
+import MenuMantenimientos from "../components/organisms/MenuMantenimientos"
 
 
 function MenuMantenimientoUsuario() {
   return (
     <div>
         <Navbarusuario/>
-        <SectionMenuMantenimiento/>
+        <MenuMantenimientos/>
     </div>
   )
 }
