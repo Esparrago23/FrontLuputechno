@@ -1,22 +1,21 @@
-import { useState, useEffect } from "react";
+import { useRef, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import Label from "../atoms/Label";
 import Field from "../molecules/Field";
-import Boton from "../atoms/Boton";
+import UserContext from "../../context/userContext";
 
 function SecionLogin() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-    const [token, setToken] = useState(sessionStorage.getItem('token'));
-    console.log(email)
-    
+    const value = useContext(UserContext);
 
     const handleClick = async (e) => {
         e.preventDefault();
         setError(null);
+        
         try {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/auth/login`, {
                 method: 'POST',
@@ -25,26 +24,22 @@ function SecionLogin() {
                     'Access-Control-Allow-Origin': '*',
                     'Authorization': sessionStorage.getItem('token')
                 },
-                body: JSON.stringify({ "username": email, "password": password })
+                body: JSON.stringify({ "username": username, "password": password })
             });
-    
             if (!response.ok) {
                 throw new Error('Error en la autenticación');
             }
     
             const authorizationHeader = response.headers.get('Authorization');
             const info= await response.json()
-             
-            if(info.id==9){
-               console.log("es un int")
-               navigate("/Principal");
-            }else{
-               navigate("/PrincipalUsuario");
-            }
-           console.log( info.id);
-
+            
+            
+            if(info.roles=="admin")
+                navigate("/Principal");
+                else 
+                navigate("/PrincipalUsuario");
             if (authorizationHeader) {
-                setToken(authorizationHeader);
+                sessionStorage.setItem('Info', JSON.stringify(info));
                 sessionStorage.setItem('token', authorizationHeader);
                 console.log('Token stored:', sessionStorage.getItem('token'));
                 
@@ -55,16 +50,8 @@ function SecionLogin() {
             setError(error.message);
             console.error('Authentication error:', error);
         }
-        /*navigate("/Principal");*/
+        value.setUser({name:JSON.parse(sessionStorage.getItem('Info')).username, rol:JSON.parse(sessionStorage.getItem('Info')).roles})
     };
-    /*useEffect(() => {
-        if (token) {
-            navigate("/Principal");
-        }
-    }, [token, navigate]);*/
-    // const handleClickRegister = () =>{
-    //     navigate("/Register")
-    // }
     
 
     return (
@@ -75,7 +62,7 @@ function SecionLogin() {
                 <Label text="Bienvenido" />
             </div>
             <div className="space-y-4 w-[300px] font-thin">
-                <Field text="usuario" type="text" placeholder="Ingresa tu usuario" value={email} onChange={setEmail} />
+                <Field text="usuario" type="text" placeholder="Ingresa tu usuario" value={username} onChange={setUsername} />
                 <Field text="Contraseña" type="password" placeholder="Ingresa tu contraseña" value={password} onChange={setPassword} />
             </div>
             {error && <div className="text-red-500">{error}</div>}

@@ -2,14 +2,11 @@ import React, { useRef, useState } from 'react';
 import Label from "../atoms/Label";
 import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
-import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
-import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
 import BotonMenu from '../molecules/BotonMenu';
-import FormularioMantenimientos from '../molecules/FormularioMantenimientos';
-import FormularioMantenimientosEditar from '../molecules/FormularioMantenimientosEditar';
 import { useNavigate } from "react-router-dom";
 import FormularioUsuarios from '../molecules/FormularioUsuarios';
+import FormularioUsuariosEditar from '../molecules/FormularioUsuariosEditar';
 const MySwal = withReactContent(Swal);
 
 function MenuUsuarios() {
@@ -31,7 +28,7 @@ function MenuUsuarios() {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
-                fetch(`${import.meta.env.VITE_URL_API}/auth/Register`, {
+                fetch(`${import.meta.env.VITE_URL_API}/auth/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -57,7 +54,7 @@ function MenuUsuarios() {
             html: (
                 <FormularioBuscar
                     type="text"
-                    placeholder="Username"
+                    placeholder="Id"
                     onChange={(value) => {
                         inputValueRef.current = value;
                     }}
@@ -67,13 +64,13 @@ function MenuUsuarios() {
             confirmButtonText: 'Buscar',
             preConfirm: () => {
                 if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el Username');
+                    Swal.showValidationMessage('Por favor ingresa el Id');
                     return false;
                 }
                 return inputValueRef.current;
             },
         }).then(async()  => {
-            const response = await fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento/${inputValueRef.current}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,21 +78,21 @@ function MenuUsuarios() {
                     'Authorization': sessionStorage.getItem('token')
                 }
             });if (!response.ok) {
-                throw new Error('Error fetching vehiculos');
+                throw new Error('Error fetching usuarios');
             }
             const data = await response.json();
             setForm(data)
-            console.log('Vehiculos data:', data);
-            console.log('Vehiculos data:', data.NumeroEconomico);
+            console.log('usuarios data:', data);
+            console.log('usuarios data:', data.NumeroEconomico);
             MySwal.fire({
-                title: 'Ingresa los datos del Vehiculo',
-                html: <FormularioMantenimientosEditar onChange={(values) => (formRef.current = values)}  data={data}/>,
+                title: 'Ingresa los datos del usuario',
+                html: <FormularioUsuariosEditar onChange={(values) => (formRef.current = values)}  data={data}/>,
                 showCloseButton: true,
                 confirmButtonText: 'Editar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
-                    fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento/${inputValueRef.current}`, {
+                    fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -107,7 +104,7 @@ function MenuUsuarios() {
                     })
                     Swal.fire({
                         title: '¡Éxito!',
-                        text: 'Vehiculo Editado correctamente.',
+                        text: 'usuario Editado correctamente.',
                         icon: 'success',
                         confirmButtonText: 'OK',
                     });
@@ -126,11 +123,11 @@ function MenuUsuarios() {
 
     const handlerClick = () => {
         MySwal.fire({
-            title: 'Ingresa los datos del Mantenimiento',
+            title: 'Ingresa los datos del usuario',
             html: (
                 <FormularioBuscar
                     type="text"
-                    placeholder="No. Folio"
+                    placeholder="id"
                     onChange={(value) => {
                         inputValueRef.current = value;
                     }}
@@ -140,7 +137,7 @@ function MenuUsuarios() {
             confirmButtonText: 'Eliminar',
             preConfirm: () => {
                 if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el No. Folio');
+                    Swal.showValidationMessage('Por favor ingresa el id');
                     return false;
                 }
                 return inputValueRef.current;
@@ -148,7 +145,7 @@ function MenuUsuarios() {
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log(inputValueRef.current);
-                fetch(`${import.meta.env.VITE_URL_API}/Mantenimiento/${inputValueRef.current}`, {
+                fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -165,7 +162,7 @@ function MenuUsuarios() {
                         });
                     } else {
                         return response.json().then((data) => {
-                            throw new Error(data.message || 'Error al eliminar el vehiculo');
+                            throw new Error(data.message || 'Error al eliminar el usuario');
                         });
                     }
                 })
@@ -180,7 +177,7 @@ function MenuUsuarios() {
         });
     };
     const NavigateToVizualizar =  () =>{
-        navigate("/VerMantenimientos"); // redirige al usuario a la página de login o cualquier otra página
+        navigate("/VerUsuarios"); // redirige al usuario a la página de login o cualquier otra página
 };
 
     return (

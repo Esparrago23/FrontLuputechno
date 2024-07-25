@@ -31,6 +31,9 @@ const navigateToPrincipal = () => {
 const navigateToUsuarios = () => {
   navigate("/Usuarios"); // redirige al usuario a la página de login o cualquier otra página
 };
+const navigateToBitacora = () => {
+  navigate("/Bitacora"); // redirige al usuario a la página de login o cualquier otra página
+};
 
 
   return (
@@ -63,7 +66,7 @@ const navigateToUsuarios = () => {
             />
           </li>
           <li className="text-base font-normal text-white bg-red-700">
-            <Button title="Bitacora" />
+            <Button title="Bitacora" onClick={navigateToBitacora} />
           </li>
           <li className="font-normal bg-red-700">
             <Button onClick={navigateToUsuarios} className="font-normal text-white" title="Usuario" />

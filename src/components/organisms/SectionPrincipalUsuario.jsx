@@ -1,5 +1,6 @@
 import Label from "../atoms/Label"
 import { useNavigate } from "react-router-dom"
+import BotonMenu from "../molecules/BotonMenu"
 
 function SectionPrincipalUsuario() {
   const navigate = useNavigate()
