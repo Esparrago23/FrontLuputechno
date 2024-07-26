@@ -58,14 +58,13 @@ function MenuResguardantes() {
                 showCloseButton: true,
                 confirmButtonText: 'Editar',
                 preConfirm: () => {
-                    console.log(formRef.current)
                     const values = formRef.current;
-                    if (!values || !values.someField) { 
+                    if (!values || Object.values(values).some(value => value === '' || value === undefined)) { 
                         Swal.showValidationMessage('Por favor, completa todos los campos');
                         return false; 
                     }
                     return values; 
-                }
+                },
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`${import.meta.env.VITE_URL_API}/Resguardantes/${inputValueRef.current}`, {

@@ -27,7 +27,7 @@ function MenuUsuarios() {
             confirmButtonText: 'Agregar',
             preConfirm: () => {
                 const values = formRef.current;
-                if (!values || !values.someField) { 
+                if (!values || Object.values(values).some(value => value === '' || value === undefined)) { 
                     Swal.showValidationMessage('Por favor, completa todos los campos');
                     return false; 
                 }
@@ -35,7 +35,7 @@ function MenuUsuarios() {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`${import.meta.env.VITE_URL_API}/usuario`, {
+                fetch(`${import.meta.env.VITE_URL_API}/auth/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -65,6 +65,7 @@ function MenuUsuarios() {
             showCloseButton: true, 
             confirmButtonText: 'Buscar',
             preConfirm: () => {
+                console.log(!inputValueRef.current)
                 if (!inputValueRef.current) {
                     Swal.showValidationMessage('Por favor ingresa el id');
                     return false;
@@ -82,24 +83,23 @@ function MenuUsuarios() {
                 }
             });
             if (!response.ok) {
-                throw new Error('No existe ese Vehiculo');
+                throw new Error('No existe ese usuario');
             }
             const data = await response.json();
             setForm(data)
             MySwal.fire({
-                title: 'Ingresa los datos del Vehiculo',
+                title: 'Ingresa los datos del usuario',
                 html: <FormularioUsuariosEditar onChange={(values) => (formRef.current = values)}  data={data}/>,
                 showCloseButton: true,
                 confirmButtonText: 'Editar',
                 preConfirm: () => {
-                    console.log(formRef.current)
                     const values = formRef.current;
-                    if (!values || !values.someField) { 
+                    if (!values || Object.values(values).some(value => value === '' || value === undefined)) { 
                         Swal.showValidationMessage('Por favor, completa todos los campos');
                         return false; 
                     }
                     return values; 
-                }
+                },
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
