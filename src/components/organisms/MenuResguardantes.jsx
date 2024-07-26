@@ -16,18 +16,16 @@ function MenuResguardantes() {
     const formRef = useRef({});
     const [form, setForm] = useState({});
     const navigate = useNavigate();
-
+    const resetInputValue = () => {
+        inputValueRef.current = '';
+    };
 
     const handlerClickE =  () => {
         MySwal.fire({
             title: 'Ingresa los datos del Resguardante',
             html: (
-                <FormularioBuscar
-                    type="text"
-                    placeholder="Curp"
-                    onChange={(value) => {
-                        inputValueRef.current = value;
-                    }}
+                <FormularioBuscar type="text" placeholder="Curp"
+                    onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
             showCloseButton: true, 
@@ -39,7 +37,8 @@ function MenuResguardantes() {
                 }
                 return inputValueRef.current;
             },
-        }).then(async()  => {
+        }).then(async(result)  => {
+            if (result.isConfirmed) {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/Resguardantes/${inputValueRef.current}`, {
                 method: 'GET',
                 headers: {
@@ -47,19 +46,28 @@ function MenuResguardantes() {
                     'Access-Control-Allow-Origin': '*',
                     'Authorization': sessionStorage.getItem('token')
                 }
-            });if (!response.ok) {
-                throw new Error('Error fetching Resguardantes');
+            });
+            if (!response.ok) {
+                throw new Error('No existe ese Resguardante');
             }
             const data = await response.json();
             setForm(data)
             MySwal.fire({
                 title: 'Ingresa los datos del Resguardante',
-                html: <FormularioResguardante onChange={(values) => (formRef.current = values)} data={data}/>,
+                html: <FormularioResguardante onChange={(values) => (formRef.current = values)}  data={data}/>,
                 showCloseButton: true,
-                confirmButtonText: 'Editar'
+                confirmButtonText: 'Editar',
+                preConfirm: () => {
+                    console.log(formRef.current)
+                    const values = formRef.current;
+                    if (!values || !values.someField) { 
+                        Swal.showValidationMessage('Por favor, completa todos los campos');
+                        return false; 
+                    }
+                    return values; 
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
                     fetch(`${import.meta.env.VITE_URL_API}/Resguardantes/${inputValueRef.current}`, {
                         method: "PUT",
                         headers: {
@@ -68,25 +76,24 @@ function MenuResguardantes() {
                             'Authorization': sessionStorage.getItem('token')
                         },
                         body: JSON.stringify(formRef.current)
-    
                     })
                     Swal.fire({
                         title: '¡Éxito!',
-                        text: 'Resguardante Editado correctamente.',
+                        text: 'Vehiculo Editado correctamente.',
                         icon: 'success',
                         confirmButtonText: 'OK',
                     });
                 }
+            })      
+        }
+        }).catch((error) => {
+            Swal.fire({
+                title: "Error",
+                text: error.message,
+                icon: "error"
             });
-    
-        })/*
-                Swal.fire({
-                    title: '¿Estás Seguro de Editarlo?',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Aceptar',
-                });*/
-           
+        });
+        resetInputValue();
     }
 
     const NavigateToVizualizar =  () =>{

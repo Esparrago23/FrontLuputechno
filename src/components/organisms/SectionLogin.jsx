@@ -70,8 +70,7 @@ function SecionLogin() {
                 <Button title="Iniciar Sesión" onClick={handleClick}></Button>
             </div>
             <div>
-                <a href="/Register" className="text-blue-500 hover:underline">No estás registrado, únete a la familia</a>
-                {/* <Button title="Registrar" onClick={handleClickRegister}></Button> */}
+                
             </div>
         </div>
         </form>

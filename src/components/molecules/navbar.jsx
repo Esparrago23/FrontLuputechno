@@ -40,18 +40,18 @@ const navigateToBitacora = () => {
     <div className="bg-azulIntegrador">
       <nav className="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl sm:px-6 md:px-8">
         <ul className="flex flex-col items-center justify-between w-full space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:space-x-8">
-          <li className="bg-green-500" >
+          <li className="" >
           
             <Button_icons onClick={navigateToPrincipal} className="w-1/2 font-normal bg-white rounded-full">
               <Img image="/Logo.png" alt="Logo" />
             </Button_icons>
           </li>
-          <li className="font-normal text-white bg-red-700 bg-oratext-base">
-            <Button onClick={navigateToResguardante}
+          <li className="font-normal text-white  bg-oratext-base ">
+            <Button className=" " onClick={navigateToResguardante}
               title="Resguardante"
             />
           </li>
-          <li className="text-base font-normal text-white bg-red-700">
+          <li className="text-base font-normal text-white ">
             <SelectNavbar OnChange={handleChange}
               opcion5="Vehiculo" value5={"/MenuVehiculos"}
               opcion1="Gasolina: Vehiculo" value1={"/Vehicules/Gasolina"}
@@ -60,19 +60,19 @@ const navigateToBitacora = () => {
               opcion4="Comodatos: Vehiculo" value4={"/Vehicules/Comodato"}
             />
           </li>
-          <li className="text-base font-normal text-white bg-red-700">
+          <li className="text-base font-normal text-white ">
             <Button onClick={navigateToMantenimientos}
               title="Mantenimiento"
             />
           </li>
-          <li className="text-base font-normal text-white bg-red-700">
+          <li className="text-base font-normal text-white ">
             <Button title="Bitacora" onClick={navigateToBitacora} />
           </li>
-          <li className="font-normal bg-red-700">
+          <li className="font-normal ">
             <Button onClick={navigateToUsuarios} className="font-normal text-white" title="Usuario" />
           </li>
           <li>
-            <Button_icons onClick={handleLogout} className="text-base bg-green-600 ">
+            <Button_icons onClick={handleLogout} className="text-base ">
               <Img image="/CerrarSesion.png" alt="Cerrar Sesión" />
               <div className="font-normal text-white ">
                 <p>cerrar sesion</p>

@@ -15,6 +15,10 @@ function MenuUsuarios() {
     const [form, setForm] = useState({});
     const navigate = useNavigate();
 
+    const resetInputValue = () => {
+        inputValueRef.current = '';
+    };
+
     const handlerClickA = () => {
         MySwal.fire({
             title: 'Ingresa los datos',
@@ -22,13 +26,16 @@ function MenuUsuarios() {
             showCloseButton: true,
             confirmButtonText: 'Agregar',
             preConfirm: () => {
-                setForm(formRef.current); // Actualizar el estado del formulario
-                return formRef.current; // Devolver el valor actual del formulario
+                const values = formRef.current;
+                if (!values || !values.someField) { 
+                    Swal.showValidationMessage('Por favor, completa todos los campos');
+                    return false; 
+                }
+                return values; 
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
-                fetch(`${import.meta.env.VITE_URL_API}/auth/register`, {
+                fetch(`${import.meta.env.VITE_URL_API}/usuario`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -36,11 +43,10 @@ function MenuUsuarios() {
                         'Authorization': sessionStorage.getItem('token')
                     },
                     body: JSON.stringify(formRef.current)
-
                 })
                 Swal.fire({
                     title: '¡Éxito!',
-                    text: 'Usuario agregado correctamente.',
+                    text: 'Vehiculo agregado correctamente.',
                     icon: 'success',
                     confirmButtonText: 'OK',
                 });
@@ -50,26 +56,23 @@ function MenuUsuarios() {
 
     const handlerClickE =  () => {
         MySwal.fire({
-            title: 'Ingresa los datos del Usuario',
+            title: 'Ingresa los datos del usuario',
             html: (
-                <FormularioBuscar
-                    type="text"
-                    placeholder="Id"
-                    onChange={(value) => {
-                        inputValueRef.current = value;
-                    }}
+                <FormularioBuscar type="text" placeholder="id"
+                    onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
             showCloseButton: true, 
             confirmButtonText: 'Buscar',
             preConfirm: () => {
                 if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el Id');
+                    Swal.showValidationMessage('Por favor ingresa el id');
                     return false;
                 }
                 return inputValueRef.current;
             },
-        }).then(async()  => {
+        }).then(async(result)  => {
+            if (result.isConfirmed) {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
                 method: 'GET',
                 headers: {
@@ -77,21 +80,28 @@ function MenuUsuarios() {
                     'Access-Control-Allow-Origin': '*',
                     'Authorization': sessionStorage.getItem('token')
                 }
-            });if (!response.ok) {
-                throw new Error('Error fetching usuarios');
+            });
+            if (!response.ok) {
+                throw new Error('No existe ese Vehiculo');
             }
             const data = await response.json();
             setForm(data)
-            console.log('usuarios data:', data);
-            console.log('usuarios data:', data.NumeroEconomico);
             MySwal.fire({
-                title: 'Ingresa los datos del usuario',
+                title: 'Ingresa los datos del Vehiculo',
                 html: <FormularioUsuariosEditar onChange={(values) => (formRef.current = values)}  data={data}/>,
                 showCloseButton: true,
-                confirmButtonText: 'Editar'
+                confirmButtonText: 'Editar',
+                preConfirm: () => {
+                    console.log(formRef.current)
+                    const values = formRef.current;
+                    if (!values || !values.someField) { 
+                        Swal.showValidationMessage('Por favor, completa todos los campos');
+                        return false; 
+                    }
+                    return values; 
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
                     fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
                         method: "PUT",
                         headers: {
@@ -100,42 +110,38 @@ function MenuUsuarios() {
                             'Authorization': sessionStorage.getItem('token')
                         },
                         body: JSON.stringify(formRef.current)
-    
                     })
                     Swal.fire({
                         title: '¡Éxito!',
-                        text: 'usuario Editado correctamente.',
+                        text: 'Vehiculo Editado correctamente.',
                         icon: 'success',
                         confirmButtonText: 'OK',
                     });
                 }
+            })      
+        }
+        }).catch((error) => {
+            Swal.fire({
+                title: "Error",
+                text: error.message,
+                icon: "error"
             });
-    
-        })/*
-                Swal.fire({
-                    title: '¿Estás Seguro de Editarlo?',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Aceptar',
-                });*/
-           
+        });
+        
     }
 
     const handlerClick = () => {
         MySwal.fire({
             title: 'Ingresa los datos del usuario',
             html: (
-                <FormularioBuscar
-                    type="text"
-                    placeholder="id"
-                    onChange={(value) => {
-                        inputValueRef.current = value;
-                    }}
+                <FormularioBuscar type="text" placeholder="id"
+                    onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
             showCloseButton: true, 
             confirmButtonText: 'Eliminar',
             preConfirm: () => {
+                console.log(!inputValueRef.current)
                 if (!inputValueRef.current) {
                     Swal.showValidationMessage('Por favor ingresa el id');
                     return false;
@@ -144,37 +150,46 @@ function MenuUsuarios() {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(inputValueRef.current);
-                fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
-                        'Authorization': sessionStorage.getItem('token')
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: 'Esta acción no se puede deshacer.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar',
+                }).then((confirmationResult) => {
+                    if (confirmationResult.isConfirmed) {
+                        fetch(`${import.meta.env.VITE_URL_API}/usuarios/${inputValueRef.current}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Access-Control-Allow-Origin": "*",
+                                'Authorization': sessionStorage.getItem('token')
+                                }
+                        }).then((response) => {
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: "Eliminado",
+                                    text: "El elemento ha sido eliminado.",
+                                    icon: "success"
+                                });
+                            } else {
+                                return response.json().then(() => {
+                                    throw new Error(`No existe ese usuario`);
+                                });
+                            }
+                        }).catch((error) => {
+                            Swal.fire({
+                                title: "Error",
+                                text: error.message,
+                                icon: "error"
+                            });
+                        });
                     }
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        Swal.fire({
-                            title: "Eliminado",
-                            text: "El elemento ha sido eliminado.",
-                            icon: "success"
-                        });
-                    } else {
-                        return response.json().then((data) => {
-                            throw new Error(data.message || 'Error al eliminar el usuario');
-                        });
-                    }
-                })
-                .catch((error) => {
-                    Swal.fire({
-                        title: "Error",
-                        text: error.message,
-                        icon: "error"
-                    });
-                });
-            }
-        });
+            }   
+        })
+        resetInputValue();
     };
     const NavigateToVizualizar =  () =>{
         navigate("/VerUsuarios"); // redirige al usuario a la página de login o cualquier otra página

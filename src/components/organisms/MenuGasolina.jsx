@@ -15,6 +15,10 @@ function MenuGasolina() {
     const formRef = useRef({});
     const [form, setForm] = useState({});
     const navigate = useNavigate();
+    const resetInputValue = () => {
+        inputValueRef.current = '';
+    };
+
     const handlerClickA = () => {
         MySwal.fire({
             title: 'Ingresa los datos',
@@ -22,12 +26,15 @@ function MenuGasolina() {
             showCloseButton: true,
             confirmButtonText: 'Agregar',
             preConfirm: () => {
-                setForm(formRef.current); // Actualizar el estado del formulario
-                return formRef.current; // Devolver el valor actual del formulario
+                const values = formRef.current;
+                if (!values || !values.someField) { 
+                    Swal.showValidationMessage('Por favor, completa todos los campos');
+                    return false; 
+                }
+                return values; 
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
                 fetch(`${import.meta.env.VITE_URL_API}/Vehiculos`, {
                     method: "POST",
                     headers: {
@@ -36,7 +43,6 @@ function MenuGasolina() {
                         'Authorization': sessionStorage.getItem('token')
                     },
                     body: JSON.stringify(formRef.current)
-
                 })
                 Swal.fire({
                     title: '¡Éxito!',
@@ -52,12 +58,8 @@ function MenuGasolina() {
         MySwal.fire({
             title: 'Ingresa los datos del vehiculo',
             html: (
-                <FormularioBuscar
-                    type="text"
-                    placeholder="No. económico"
-                    onChange={(value) => {
-                        inputValueRef.current = value;
-                    }}
+                <FormularioBuscar type="text" placeholder="No. económico"
+                    onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
             showCloseButton: true, 
@@ -69,7 +71,8 @@ function MenuGasolina() {
                 }
                 return inputValueRef.current;
             },
-        }).then(async()  => {
+        }).then(async(result)  => {
+            if (result.isConfirmed) {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
                 method: 'GET',
                 headers: {
@@ -77,21 +80,28 @@ function MenuGasolina() {
                     'Access-Control-Allow-Origin': '*',
                     'Authorization': sessionStorage.getItem('token')
                 }
-            });if (!response.ok) {
-                throw new Error('Error fetching vehiculos');
+            });
+            if (!response.ok) {
+                throw new Error('No existe ese Vehiculo');
             }
             const data = await response.json();
             setForm(data)
-            console.log('Vehiculos data:', data);
-            console.log('Vehiculos data:', data.NumeroEconomico);
             MySwal.fire({
                 title: 'Ingresa los datos del Vehiculo',
                 html: <FormularioMotosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Gasolina" data={data}/>,
                 showCloseButton: true,
-                confirmButtonText: 'Editar'
+                confirmButtonText: 'Editar',
+                preConfirm: () => {
+                    console.log(formRef.current)
+                    const values = formRef.current;
+                    if (!values || !values.someField) { 
+                        Swal.showValidationMessage('Por favor, completa todos los campos');
+                        return false; 
+                    }
+                    return values; 
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    console.log(JSON.stringify(formRef.current)); // Mostrar el valor actual del formulario
                     fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
                         method: "PUT",
                         headers: {
@@ -100,7 +110,6 @@ function MenuGasolina() {
                             'Authorization': sessionStorage.getItem('token')
                         },
                         body: JSON.stringify(formRef.current)
-    
                     })
                     Swal.fire({
                         title: '¡Éxito!',
@@ -109,33 +118,30 @@ function MenuGasolina() {
                         confirmButtonText: 'OK',
                     });
                 }
+            })      
+        }
+        }).catch((error) => {
+            Swal.fire({
+                title: "Error",
+                text: error.message,
+                icon: "error"
             });
-    
-        })/*
-                Swal.fire({
-                    title: '¿Estás Seguro de Editarlo?',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Aceptar',
-                });*/
-           
+        });
+        resetInputValue();
     }
 
     const handlerClick = () => {
         MySwal.fire({
             title: 'Ingresa los datos del vehiculo',
             html: (
-                <FormularioBuscar
-                    type="text"
-                    placeholder="No. económico"
-                    onChange={(value) => {
-                        inputValueRef.current = value;
-                    }}
+                <FormularioBuscar type="text" placeholder="No. económico"
+                    onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
             showCloseButton: true, 
             confirmButtonText: 'Eliminar',
             preConfirm: () => {
+                console.log(!inputValueRef.current)
                 if (!inputValueRef.current) {
                     Swal.showValidationMessage('Por favor ingresa el No. económico');
                     return false;
@@ -144,37 +150,46 @@ function MenuGasolina() {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log(inputValueRef.current);
-                fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
-                        'Authorization': sessionStorage.getItem('token')
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: 'Esta acción no se puede deshacer.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar',
+                }).then((confirmationResult) => {
+                    if (confirmationResult.isConfirmed) {
+                        fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Access-Control-Allow-Origin": "*",
+                                'Authorization': sessionStorage.getItem('token')
+                                }
+                        }).then((response) => {
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: "Eliminado",
+                                    text: "El elemento ha sido eliminado.",
+                                    icon: "success"
+                                });
+                            } else {
+                                return response.json().then(() => {
+                                    throw new Error(`No existe ese Vehiculo`);
+                                });
+                            }
+                        }).catch((error) => {
+                            Swal.fire({
+                                title: "Error",
+                                text: error.message,
+                                icon: "error"
+                            });
+                        });
                     }
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        Swal.fire({
-                            title: "Eliminado",
-                            text: "El elemento ha sido eliminado.",
-                            icon: "success"
-                        });
-                    } else {
-                        return response.json().then((data) => {
-                            throw new Error(data.message || 'Error al eliminar el vehiculo');
-                        });
-                    }
-                })
-                .catch((error) => {
-                    Swal.fire({
-                        title: "Error",
-                        text: error.message,
-                        icon: "error"
-                    });
-                });
-            }
-        });
+            }   
+        })
+        resetInputValue();
     };
     const NavigateToVizualizar =  () =>{
         navigate("/VerGasolina"); // redirige al usuario a la página de login o cualquier otra página

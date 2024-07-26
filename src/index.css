@@ -7,4 +7,8 @@
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
-}
+    
+        --tw-bg-opacity: 1;
+        background-color: rgb(226 232 240 / var(--tw-bg-opacity)) /* #e2e8f0 */;
+    
+    }

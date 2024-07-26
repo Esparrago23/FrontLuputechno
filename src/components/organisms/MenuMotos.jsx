@@ -25,14 +25,7 @@ function MenuMotos() {
             html: <FormularioVehiculos onChange={(values) => (formRef.current = values)} tipoVehiculo="Motos"/>,
             showCloseButton: true,
             confirmButtonText: 'Agregar',
-            preConfirm: () => {
-                const values = formRef.current;
-                if (!values || !values.someField) { 
-                    Swal.showValidationMessage('Por favor, completa todos los campos');
-                    return false; 
-                }
-                return values; 
-            },
+            
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`${import.meta.env.VITE_URL_API}/Vehiculos`, {
@@ -64,13 +57,7 @@ function MenuMotos() {
             ),
             showCloseButton: true, 
             confirmButtonText: 'Buscar',
-            preConfirm: () => {
-                if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el No. económico');
-                    return false;
-                }
-                return inputValueRef.current;
-            },
+            
         }).then(async(result)  => {
             if (result.isConfirmed) {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
@@ -91,15 +78,7 @@ function MenuMotos() {
                 html: <FormularioMotosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Motos" data={data}/>,
                 showCloseButton: true,
                 confirmButtonText: 'Editar',
-                preConfirm: () => {
-                    console.log(formRef.current)
-                    const values = formRef.current;
-                    if (!values || !values.someField) { 
-                        Swal.showValidationMessage('Por favor, completa todos los campos');
-                        return false; 
-                    }
-                    return values; 
-                }
+                
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`${import.meta.env.VITE_URL_API}/Vehiculos/${inputValueRef.current}`, {
@@ -127,6 +106,7 @@ function MenuMotos() {
                 icon: "error"
             });
         });
+        resetInputValue();
     }
 
     const handlerClick = () => {
