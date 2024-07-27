@@ -1,16 +1,15 @@
 import React, { useState,useRef } from 'react';
 import BotonMenu from "../components/molecules/BotonMenu";
 import Table from '../components/atoms/Table';
-import Navbar from '../components/molecules/navbar';
 import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
 import FormularioBuscar from '../components/molecules/FormularioBuscar';
 import { useContext } from "react";
-
+import Navbarusuario from "../components/molecules/Navbarusuario"
 import { Navigate} from "react-router-dom";
 import UserContext from "../context/userContext";
 
-function VizualizarMantenimientos() {
+function VizualizarMantenimientosUs() {
     const value = useContext(UserContext)
     const MySwal = withReactContent(Swal);
     const [mantenimientos, setMantenimientos] = useState([]);
@@ -87,20 +86,19 @@ function VizualizarMantenimientos() {
     ];
 
 
-    return (
-        
-         value.user.name  ? 
-         <div >
-         <Navbar></Navbar>
-         <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+  return (
 
+        value.user.name  ? 
+         <div >
+         <Navbarusuario/>
+         <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
          <BotonMenu title={"Mostrar"} image={"/Papel.png"} onClick={handlerClickM} />
          <BotonMenu title={"Buscar"} image={"/Papel.png"} onClick={handlerClick} />
          </div>
          <Table columns={columns} data={mantenimientos} />
      </div>
          : <Navigate to="/"/>
-    );
+  )
 }
 
-export default VizualizarMantenimientos;
+export default VizualizarMantenimientosUs
