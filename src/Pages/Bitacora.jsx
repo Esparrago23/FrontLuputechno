@@ -96,15 +96,17 @@ function Bitacora() {
 
 
     return (
-        <div >
-            <Navbar></Navbar>
-            <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+        <div className="min-h-screen flex flex-col">
+    <Navbar />
+    <div className="flex flex-grow mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+        <BotonMenu title="Mostrar" image="/Comodato.png" onClick={handlerClickM} />
+        {/* <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} /> */}
+    </div>
+    <div className="flex-grow overflow-auto">
+        <Table columns={columns} data={Bitacoras} />
+    </div>
+</div>
 
-            <BotonMenu title={"Mostrar"} image={"/Comodato.png"} onClick={handlerClickM} />
-            {/* <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} /> */}
-            </div>
-            <Table columns={columns} data={Bitacoras} />
-        </div>
     );
 }
 

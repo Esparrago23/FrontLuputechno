@@ -38,50 +38,50 @@ const navigateToBitacora = () => {
 
   return (
     <div className="bg-azulIntegrador">
-      <nav className="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl sm:px-6 md:px-8">
-        <ul className="flex flex-col items-center justify-between w-full space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 md:space-x-8">
-          <li className="" >
-          
-            <Button_icons onClick={navigateToPrincipal} className="w-1/2 font-normal bg-white rounded-full">
-              <Img image="/Logo.png" alt="Logo" />
-            </Button_icons>
-          </li>
-          <li className="font-normal text-white  bg-oratext-base ">
-            <Button className=" " onClick={navigateToResguardante}
-              title="Resguardante"
-            />
-          </li>
-          <li className="text-base font-normal text-white ">
-            <SelectNavbar OnChange={handleChange}
-              opcion5="Vehiculo" value5={"/MenuVehiculos"}
-              opcion1="Gasolina: Vehiculo" value1={"/Vehicules/Gasolina"}
-              opcion2="Diesel: Vehiculo" value2={"/Vehicules/Diesel"}
-              opcion3="Motos: Vehiculo" value3={"/Vehicules/Motos"}
-              opcion4="Comodatos: Vehiculo" value4={"/Vehicules/Comodato"}
-            />
-          </li>
-          <li className="text-base font-normal text-white ">
-            <Button onClick={navigateToMantenimientos}
-              title="Mantenimiento"
-            />
-          </li>
-          <li className="text-base font-normal text-white ">
-            <Button title="Bitacora" onClick={navigateToBitacora} />
-          </li>
-          <li className="font-normal ">
-            <Button onClick={navigateToUsuarios} className="font-normal text-white" title="Usuario" />
-          </li>
-          <li>
-            <Button_icons onClick={handleLogout} className="text-base ">
-              <Img image="/CerrarSesion.png" alt="Cerrar Sesión" />
-              <div className="font-normal text-white ">
-                <p>cerrar sesion</p>
-              </div>
-            </Button_icons>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <nav className="px-4 py-3 mx-auto max-w-7xl sm:px-6 md:px-8">
+    <ul className="grid grid-cols-2 gap-3 items-center justify-items-center sm:flex sm:flex-row sm:space-x-3 md:space-x-6 sm:justify-center sm:justify-items-auto">
+      <li className="flex justify-center sm:flex-none">
+        <Button_icons onClick={navigateToPrincipal} className="w-full sm:w-auto font-normal bg-white rounded-full">
+          <Img image="/Logo.png" alt="Logo" className="h-12 sm:h-14" />
+        </Button_icons>
+      </li>
+      <li className="flex justify-center sm:flex-none font-normal text-white text-sm sm:text-base">
+        <Button onClick={navigateToResguardante} title="Resguardante" className="w-full sm:w-auto p-2" />
+      </li>
+      <li className="flex justify-center sm:flex-none text-white text-sm sm:text-base">
+        <SelectNavbar 
+          OnChange={handleChange}
+          opcion5="Vehiculo" value5="/MenuVehiculos"
+          opcion1="Gasolina: Vehiculo" value1="/Vehicules/Gasolina"
+          opcion2="Diesel: Vehiculo" value2="/Vehicules/Diesel"
+          opcion3="Motos: Vehiculo" value3="/Vehicules/Motos"
+          opcion4="Comodatos: Vehiculo" value4="/Vehicules/Comodato"
+          className="w-full sm:w-auto p-2"
+        />
+      </li>
+      <li className="flex justify-center sm:flex-none text-white text-sm sm:text-base">
+        <Button onClick={navigateToMantenimientos} title="Mantenimiento" className="w-full sm:w-auto p-2" />
+      </li>
+      <li className="flex justify-center sm:flex-none text-white text-sm sm:text-base">
+        <Button onClick={navigateToBitacora} title="Bitacora" className="w-full sm:w-auto p-2" />
+      </li>
+      <li className="flex justify-center sm:flex-none font-normal text-white text-sm sm:text-base">
+        <Button onClick={navigateToUsuarios} className="w-full sm:w-auto p-2" title="Usuario" />
+      </li>
+      <li className="flex justify-center col-span-2 sm:col-span-1 sm:flex-none">
+        <Button_icons onClick={handleLogout} className="w-full sm:w-auto p-2">
+          <Img image="/CerrarSesion.png" alt="Cerrar Sesión" className="h-10 sm:h-12" />
+          <div className="font-normal text-white text-sm sm:text-base">
+            <p>cerrar sesion</p>
+          </div>
+        </Button_icons>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
   );
 }
 

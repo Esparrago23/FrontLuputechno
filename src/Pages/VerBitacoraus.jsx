@@ -93,18 +93,25 @@ function VerBitacoraus() {
         { header: 'ServicioRealizado', accessor: 'ServicioRealizado' },
         { header: 'CostoServicio', accessor: 'CostoServicio' },
     ];
-  return (
-    
-    <div >
-    <Navbarusuario/>
-    <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+    return (
+        <div className="min-h-screen flex flex-col bg-slate-200">
+    <Navbarusuario />
+    <div className="flex flex-grow mt-16 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2 px-4">
+        <BotonMenu title="Mostrar" image="/Comodato.png" onClick={handlerClickM} />
+        {/* <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} /> */}
+    </div>
+    <div className="flex flex-col items-center mt-8 px-4 flex-grow">
+        <div className="w-full max-w-4xl overflow-hidden" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+            <div className="overflow-y-auto" style={{ maxHeight: '100%' }}>
+                <Table columns={columns} data={Bitacoras} />
+            </div>
+        </div>
+    </div>
+</div>
 
-    <BotonMenu title={"Mostrar"} image={"/Comodato.png"} onClick={handlerClickM} />
-    {/* <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} /> */}
-    </div>
-    <Table columns={columns} data={Bitacoras} />
-    </div>
-  )
+
+
+    )
 }
 
 export default VerBitacoraus
