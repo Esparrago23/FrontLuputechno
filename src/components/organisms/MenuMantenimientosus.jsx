@@ -181,28 +181,28 @@ function MenuMantenimientosus() {
     const NavigateToVizualizar =  () =>{
         navigate("/VerMantenimientosus"); // redirige al usuario a la página de login o cualquier otra página
     };
-  return (
-    <div className="mt-16">
-    <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
-        <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
+    return (
+        <div className="mt-16">
+        <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+            <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-evenly mt-16 bg-slate-200">
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Añadir"} image={"/Papel2.png"} onClick={handlerClickA} />
+            </div>
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Visualizar"} image={"/Papel.png"} onClick={NavigateToVizualizar} />
+            </div>
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
+            </div>
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
+            </div>
+        </div>
     </div>
-    <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-evenly mt-16 bg-slate-200">
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Añadir"} image={"/Papel2.png"} onClick={handlerClickA} />
-        </div>
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Visualizar"} image={"/Papel.png"} onClick={NavigateToVizualizar} />
-        </div>
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
-        </div>
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
-        </div>
-    </div>
-</div>
 
-  )
+    )
 }
 
 export default MenuMantenimientosus

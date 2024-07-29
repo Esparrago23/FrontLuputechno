@@ -83,16 +83,19 @@ function VizualizarResguardantesus() {
     ];
   return (
     <div>
-        <div >
-            <Navbarusuario/>
-            <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
-
+    <div>
+        <Navbarusuario />
+        <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
             <BotonMenu title={"Mostrar"} image={"/Resguardante.png"} onClick={handlerClickM} />
             <BotonMenu title={"Buscar"} image={"/Resguardante.png"} onClick={handlerClick} />
-            </div>
+        </div>
+        <div className="overflow-x-auto">
             <Table columns={columns} data={resguardante} />
         </div>
     </div>
+</div>
+
+
   )
 }
 

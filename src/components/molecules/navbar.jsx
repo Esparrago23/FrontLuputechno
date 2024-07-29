@@ -39,7 +39,7 @@ const navigateToBitacora = () => {
   return (
     <div className="bg-azulIntegrador">
   <nav className="px-4 py-3 mx-auto max-w-7xl sm:px-6 md:px-8">
-    <ul className="grid grid-cols-2 gap-3 items-center justify-items-center sm:flex sm:flex-row sm:space-x-3 md:space-x-6 sm:justify-center sm:justify-items-auto">
+    <ul className="flex flex-wrap gap-3 items-center justify-center sm:justify-start sm:space-x-3 md:space-x-6">
       <li className="flex justify-center sm:flex-none">
         <Button_icons onClick={navigateToPrincipal} className="w-full sm:w-auto font-normal bg-white rounded-full">
           <Img image="/Logo.png" alt="Logo" className="h-12 sm:h-14" />
@@ -79,7 +79,6 @@ const navigateToBitacora = () => {
     </ul>
   </nav>
 </div>
-
 
 
   );

@@ -100,19 +100,20 @@ function MenuResguardantes() {
     };
 
     return (
-        <div className="mt-16">
-    <div className="bg-slate-200 mb-4 text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+        <div className="mt-16 flex flex-col items-center">
+    <div className="bg-slate-200 mb-4 text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl text-stone-950 w-full">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="bg-slate-200 grid grid-cols-2 gap-4 lg:flex lg:justify-evenly mt-16">
-        <div className="p-2">
+    <div className="bg-slate-200 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:flex lg:justify-evenly mt-16 w-full">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Visualizar"} image={"/Resguardante.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
     </div>
 </div>
+
 
     );
 }

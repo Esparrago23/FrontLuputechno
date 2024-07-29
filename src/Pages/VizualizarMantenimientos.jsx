@@ -90,15 +90,17 @@ function VizualizarMantenimientos() {
     return (
         
          value.user.name  ? 
-         <div >
-         <Navbar></Navbar>
-         <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+         <div>
+  <Navbar />
+  <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+    <BotonMenu title={"Mostrar"} image={"/Papel.png"} onClick={handlerClickM} />
+    <BotonMenu title={"Buscar"} image={"/Papel.png"} onClick={handlerClick} />
+  </div>
+  <div className="overflow-x-auto">
+    <Table columns={columns} data={mantenimientos} />
+  </div>
+</div>
 
-         <BotonMenu title={"Mostrar"} image={"/Papel.png"} onClick={handlerClickM} />
-         <BotonMenu title={"Buscar"} image={"/Papel.png"} onClick={handlerClick} />
-         </div>
-         <Table columns={columns} data={mantenimientos} />
-     </div>
          : <Navigate to="/"/>
     );
 }

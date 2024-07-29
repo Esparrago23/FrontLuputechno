@@ -90,15 +90,17 @@ function VizualizarVehiculos() {
 
 
     return (
-        <div >
-            <Navbar></Navbar>
-            <div className="bg-slate-200 flex justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2 mt-16">
-
-            <BotonMenu title={"Mostrar"} image={"/Moto.png"} onClick={handlerClickM} />
-            <BotonMenu title={"Buscar"} image={"/Moto.png"} onClick={handlerClick} />
-            </div>
-            <Table columns={columns} data={vehicles} />
+        <div>
+            <Navbar />
+                <div className="bg-slate-200 flex justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2 mt-16">
+                    <BotonMenu title={"Mostrar"} image={"/Moto.png"} onClick={handlerClickM} />
+                    <BotonMenu title={"Buscar"} image={"/Moto.png"} onClick={handlerClick} />
+                </div>
+                <div className="overflow-x-auto">
+                    <Table columns={columns} data={vehicles} />
+                </div>
         </div>
+
     );
 }
 
