@@ -2,9 +2,7 @@ import React, { useRef, useState } from 'react';
 import Label from "../atoms/Label";
 import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
-import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
-import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
 import BotonMenu from '../molecules/BotonMenu';
 import FormularioMantenimientos from '../molecules/FormularioMantenimientos';
 import FormularioMantenimientosEditar from '../molecules/FormularioMantenimientosEditar';
@@ -142,6 +140,11 @@ function MenuMantenimientosus() {
                     Swal.showValidationMessage('Por favor ingresa el No. Folio');
                     return false;
                 }
+                const regex = /^\s*[a-zA-Z0-9]*\s*$/;
+                if(!regex.test(inputValueRef.current )){
+                    Swal.showValidationMessage('No se permiten caracteres especiales');
+                        return false;
+                }
                 return inputValueRef.current;
             },
         }).then((result) => {
@@ -186,7 +189,7 @@ function MenuMantenimientosus() {
     <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-evenly mt-16 bg-slate-200">
+    <div className="grid grid-cols-2 gap-4 mt-16 sm:flex sm:justify-evenly bg-slate-200">
         <div className="col-span-1 sm:mb-0">
             <BotonMenu title={"Añadir"} image={"/Papel2.png"} onClick={handlerClickA} />
         </div>

@@ -97,7 +97,10 @@ function VizualizarVehiculos() {
             <BotonMenu title={"Mostrar"} image={"/Moto.png"} onClick={handlerClickM} />
             <BotonMenu title={"Buscar"} image={"/Moto.png"} onClick={handlerClick} />
             </div>
+            <div className='overflow-x-auto'>
+
             <Table columns={columns} data={vehicles} />
+            </div>
         </div>
     );
 }

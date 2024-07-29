@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
 import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
-import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
+import FormularioVehiculosEditar from '../molecules/FormularioVehiculosEditar';
 import BotonMenu from '../molecules/BotonMenu';
 import { useNavigate } from "react-router-dom";
 
@@ -85,10 +85,13 @@ function MenuGasolina() {
                 throw new Error('No existe ese Vehiculo');
             }
             const data = await response.json();
+            if(data.TipoVehiculo!="Gasolina"){
+                throw new Error('El Vehiculo seleccionado no es de gasolina');
+            }
             setForm(data)
             MySwal.fire({
                 title: 'Ingresa los datos del Vehiculo',
-                html: <FormularioMotosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Gasolina" data={data}/>,
+                html: <FormularioVehiculosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Gasolina" data={data}/>,
                 showCloseButton: true,
                 confirmButtonText: 'Editar',
                 preConfirm: () => {
@@ -141,9 +144,15 @@ function MenuGasolina() {
             confirmButtonText: 'Eliminar',
             preConfirm: () => {
                 console.log(!inputValueRef.current)
+                
                 if (!inputValueRef.current) {
                     Swal.showValidationMessage('Por favor ingresa el No. económico');
                     return false;
+                }
+                const regex = /^\s*[a-zA-Z0-9]*\s*$/;
+                if(!regex.test(inputValueRef.current )){
+                    Swal.showValidationMessage('No se permiten caracteres especiales');
+                        return false;
                 }
                 return inputValueRef.current;
             },
@@ -190,26 +199,27 @@ function MenuGasolina() {
         })
         resetInputValue();
     };
+    
     const NavigateToVizualizar =  () =>{
         navigate("/VerGasolina"); // redirige al usuario a la página de login o cualquier otra página
 };
 
     return (
         <div className="mt-16">
-    <div className="bg-slate-200 mb-4 text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+    <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="bg-slate-200 grid grid-cols-2 gap-4 lg:flex lg:justify-evenly mt-16">
-        <div className="p-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 mt-16 bg-slate-200 lg:flex lg:justify-center gap-4  p-4 w-full">
+        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
             <BotonMenu title={"Añadir"} image={"/Gasolina.png"} onClick={handlerClickA} />
         </div>
-        <div className="p-2">
+        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
             <BotonMenu title={"Visualizar"} image={"/Gasolina.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="p-2">
+        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
-        <div className="p-2">
+        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
             <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
         </div>
     </div>

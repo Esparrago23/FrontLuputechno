@@ -95,7 +95,10 @@ function VizualizarMantenimientosUs() {
          <BotonMenu title={"Mostrar"} image={"/Papel.png"} onClick={handlerClickM} />
          <BotonMenu title={"Buscar"} image={"/Papel.png"} onClick={handlerClick} />
          </div>
+         <div className='overflow-x-auto'>
+
          <Table columns={columns} data={mantenimientos} />
+         </div>
      </div>
          : <Navigate to="/"/>
   )

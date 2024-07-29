@@ -58,7 +58,7 @@ function MenuUsuarios() {
         MySwal.fire({
             title: 'Ingresa los datos del usuario',
             html: (
-                <FormularioBuscar type="text" placeholder="id"
+                <FormularioBuscar type="number" placeholder="id"
                     onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
@@ -134,19 +134,18 @@ function MenuUsuarios() {
         MySwal.fire({
             title: 'Ingresa los datos del usuario',
             html: (
-                <FormularioBuscar type="text" placeholder="id"
+                <FormularioBuscar type="number" placeholder="id hola"
                     onChange={(value) => {inputValueRef.current = value}}
                 />
             ),
             showCloseButton: true, 
-            confirmButtonText: 'Eliminar',
+            confirmButtonText: 'Eliminar', //Aqui esta el boton
             preConfirm: () => {
                 console.log(!inputValueRef.current)
                 if (!inputValueRef.current) {
                     Swal.showValidationMessage('Por favor ingresa el id');
                     return false;
                 }
-                return inputValueRef.current;
             },
         }).then((result) => {
             if (result.isConfirmed) {
@@ -196,21 +195,21 @@ function MenuUsuarios() {
 };
 
     return (
-        <div className="mt-16">
-    <div className="bg-slate-200 mb-4 text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+        <div className="mt-16 flex flex-col items-center">
+    <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950 w-full">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="bg-slate-200 grid grid-cols-2 gap-4 lg:flex lg:justify-evenly mt-16">
-        <div className="p-2">
+    <div className="grid grid-cols-2 gap-4 mt-16 bg-slate-200 lg:flex lg:justify-evenly">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Añadir"} image={"/AddUseer.png"} onClick={handlerClickA} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Visualizar"} image={"/users.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
         </div>
     </div>

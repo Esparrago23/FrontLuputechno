@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
 import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
-import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
+import FormularioVehiculosEditar from '../molecules/FormularioVehiculosEditar';
 import BotonMenu from '../molecules/BotonMenu';
 
 const MySwal = withReactContent(Swal);
@@ -86,10 +86,13 @@ function MenuMotos() {
                 throw new Error('No existe ese Vehiculo');
             }
             const data = await response.json();
+            if(data.TipoVehiculo!="Motos"){
+                throw new Error('El Vehiculo seleccionado no es de motos');
+            }
             setForm(data)
             MySwal.fire({
                 title: 'Ingresa los datos del Vehiculo',
-                html: <FormularioMotosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Motos" data={data}/>,
+                html: <FormularioVehiculosEditar onChange={(values) => (formRef.current = values)} tipoVehiculo="Motos" data={data}/>,
                 showCloseButton: true,
                 confirmButtonText: 'Editar',
                 preConfirm: () => {
@@ -142,9 +145,15 @@ function MenuMotos() {
             confirmButtonText: 'Eliminar',
             preConfirm: () => {
                 console.log(!inputValueRef.current)
+                
                 if (!inputValueRef.current) {
-                    Swal.showValidationMessage('Por favor ingresa el id');
+                    Swal.showValidationMessage('Por favor ingresa el No. económico');
                     return false;
+                }
+                const regex = /^\s*[a-zA-Z0-9]*\s*$/;
+                if(!regex.test(inputValueRef.current )){
+                    Swal.showValidationMessage('No se permiten caracteres especiales');
+                        return false;
                 }
                 return inputValueRef.current;
             },
@@ -197,21 +206,21 @@ function MenuMotos() {
     };
 
     return (
-        <div className="mt-16">
-    <div className="bg-slate-200 mb-4 text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+        <div className="mt-16 flex flex-col items-center">
+    <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950 w-full">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="bg-slate-200 grid grid-cols-2 gap-4 lg:flex lg:justify-evenly mt-16">
-        <div className="p-2">
+    <div className="grid grid-cols-2 gap-4 mt-16 bg-slate-200 lg:flex lg:justify-evenly w-full sm:grid-cols-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Añadir"} image={"/Moto.png"} onClick={handlerClickA} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Visualizar"} image={"/Moto.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
         </div>
     </div>

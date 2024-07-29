@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Label from "../atoms/Label";
 import Swal from "sweetalert2";
 import withReactContent from 'sweetalert2-react-content';
-import FormularioVehiculos from '../molecules/FormularioVehiculos';
 import FormularioBuscar from '../molecules/FormularioBuscar';
-import FormularioMotosEditar from '../molecules/FormularioMotosEditar';
 import BotonMenu from '../molecules/BotonMenu';
 import FormularioResguardante from '../molecules/FormularioResguardante';
 
@@ -100,15 +98,15 @@ function MenuResguardantes() {
     };
 
     return (
-        <div className="mt-16">
-    <div className="bg-slate-200 mb-4 text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+        <div className="mt-16 flex flex-col items-center">
+    <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950 w-full">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="bg-slate-200 grid grid-cols-2 gap-4 lg:flex lg:justify-evenly mt-16">
-        <div className="p-2">
+    <div className="grid grid-cols-2 gap-4 mt-16 bg-slate-200 lg:flex sm:grid-cols-2 lg:justify-evenly w-full">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Visualizar"} image={"/Resguardante.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="p-2">
+        <div className="p-2 flex justify-center">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
     </div>

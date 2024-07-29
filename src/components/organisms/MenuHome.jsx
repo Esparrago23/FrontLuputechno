@@ -17,7 +17,7 @@ function MenuHome() {
     <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center mt-16 bg-slate-200">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center mt-16 bg-slate-200 p-4">
         <div className="w-full sm:w-auto">
             <BotonMenu 
                 title={"Vehículos"} 

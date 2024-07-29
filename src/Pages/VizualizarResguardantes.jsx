@@ -92,7 +92,10 @@ function VizualizarResguardantes() {
             <BotonMenu title={"Mostrar"} image={"/Resguardante.png"} onClick={handlerClickM} />
             <BotonMenu title={"Buscar"} image={"/Resguardante.png"} onClick={handlerClick} />
             </div>
+            <div className='overflow-x-auto'>
+
             <Table columns={columns} data={resguardante} />
+            </div>
         </div>
     );
 }

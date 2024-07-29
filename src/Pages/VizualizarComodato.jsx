@@ -98,7 +98,10 @@ function VizualizarComodato() {
             <BotonMenu title={"Mostrar"} image={"/Comodato.png"} onClick={handlerClickM} />
             <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} />
             </div>
+            <div className='overflow-x-auto'>
+
             <Table columns={columns} data={vehicles} />
+            </div>
         </div>
     );
 }

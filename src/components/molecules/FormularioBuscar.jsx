@@ -1,7 +1,9 @@
 import React from 'react';
 import Input from '../atoms/Input';
+import { useState } from 'react';
 
 function FormularioBuscar(props) {
+    const [error, setError] = useState('')
     return (
         <div>
             <Input
@@ -10,6 +12,7 @@ function FormularioBuscar(props) {
                 placeholder={props.placeholder}
                 value={props.value}
             />
+            <label style={{color:"red"}}>{error}</label>
         </div>
     );
 }
