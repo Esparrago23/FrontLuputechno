@@ -39,16 +39,16 @@ const navigateToBitacora = () => {
   return (
     <div className="bg-azulIntegrador">
   <nav className="px-4 py-3 mx-auto max-w-7xl sm:px-6 md:px-8">
-    <ul className="flex flex-wrap gap-3 items-center justify-center sm:justify-start sm:space-x-3 md:space-x-6 ">
+    <ul className="flex flex-wrap items-center justify-center gap-3 sm:justify-start sm:space-x-3 md:space-x-6">
       <li className="flex justify-center sm:flex-none">
-        <Button_icons onClick={navigateToPrincipal} className="w-full sm:w-auto font-normal bg-white rounded-full">
+        <Button_icons onClick={navigateToPrincipal} className="w-full font-normal bg-white rounded-full sm:w-auto">
           <Img image="/Logo.png" alt="Logo" className="h-12 sm:h-14" />
         </Button_icons>
       </li>
-      <li className="flex justify-center sm:flex-none font-normal text-white text-sm sm:text-base">
-        <Button onClick={navigateToResguardante} title="Resguardante" className="w-full sm:w-auto p-2" />
+      <li className="flex justify-center text-sm font-normal text-white sm:flex-none sm:text-base">
+        <Button onClick={navigateToResguardante} title="Resguardante" className="w-full p-2 sm:w-auto" />
       </li>
-      <li className="flex justify-center sm:flex-none text-white text-sm sm:text-base">
+      <li className="flex justify-center text-sm text-white sm:flex-none sm:text-base">
         <SelectNavbar 
           OnChange={handleChange}
           opcion5="Vehiculo" value5="/MenuVehiculos"
@@ -56,22 +56,22 @@ const navigateToBitacora = () => {
           opcion2="Diesel: Vehiculo" value2="/Vehicules/Diesel"
           opcion3="Motos: Vehiculo" value3="/Vehicules/Motos"
           opcion4="Comodatos: Vehiculo" value4="/Vehicules/Comodato"
-          className="w-full sm:w-auto p-2"
+          className="w-full p-2 sm:w-auto"
         />
       </li>
-      <li className="flex justify-center sm:flex-none text-white text-sm sm:text-base">
-        <Button onClick={navigateToMantenimientos} title="Mantenimiento" className="w-full sm:w-auto p-2" />
+      <li className="flex justify-center text-sm text-white sm:flex-none sm:text-base">
+        <Button onClick={navigateToMantenimientos} title="Mantenimiento" className="w-full p-2 sm:w-auto" />
       </li>
-      <li className="flex justify-center sm:flex-none text-white text-sm sm:text-base">
-        <Button onClick={navigateToBitacora} title="Bitacora" className="w-full sm:w-auto p-2" />
+      <li className="flex justify-center text-sm text-white sm:flex-none sm:text-base">
+        <Button onClick={navigateToBitacora} title="Bitacora" className="w-full p-2 sm:w-auto" />
       </li>
-      <li className="flex justify-center sm:flex-none font-normal text-white text-sm sm:text-base">
-        <Button onClick={navigateToUsuarios} className="w-full sm:w-auto p-2" title="Usuario" />
+      <li className="flex justify-center text-sm font-normal text-white sm:flex-none sm:text-base">
+        <Button onClick={navigateToUsuarios} className="w-full p-2 sm:w-auto" title="Usuario" />
       </li>
       <li className="flex justify-center col-span-2 sm:col-span-1 sm:flex-none">
-        <Button_icons onClick={handleLogout} className="w-full sm:w-auto p-2">
+        <Button_icons onClick={handleLogout} className="w-full p-2 sm:w-auto">
           <Img image="/CerrarSesion.png" alt="Cerrar Sesión" className="h-10 sm:h-12" />
-          <div className="font-normal text-white text-sm sm:text-base">
+          <div className="text-sm font-normal text-white sm:text-base">
             <p>cerrar sesion</p>
           </div>
         </Button_icons>
@@ -79,7 +79,6 @@ const navigateToBitacora = () => {
     </ul>
   </nav>
 </div>
-
 
 
   );

@@ -91,18 +91,16 @@ function VizualizarComodato() {
 
 
     return (
-        <div >
-            <Navbar></Navbar>
-            <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
-
-            <BotonMenu title={"Mostrar"} image={"/Comodato.png"} onClick={handlerClickM} />
-            <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} />
-            </div>
-            <div className='overflow-x-auto'>
-
-            <Table columns={columns} data={vehicles} />
-            </div>
-        </div>
+        <div>
+  <Navbar />
+  <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+    <BotonMenu title={"Mostrar"} image={"/Comodato.png"} onClick={handlerClickM} />
+    <BotonMenu title={"Buscar"} image={"/Comodato.png"} onClick={handlerClick} />
+  </div>
+  <div className="overflow-x-auto">
+    <Table columns={columns} data={vehicles} />
+  </div>
+</div>
     );
 }
 

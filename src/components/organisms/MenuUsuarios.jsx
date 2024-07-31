@@ -195,25 +195,26 @@ function MenuUsuarios() {
 };
 
     return (
-        <div className="mt-16 flex flex-col items-center">
-    <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950 w-full">
+        <div className="flex flex-col items-center mt-16">
+    <div className="w-full mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="grid grid-cols-2 gap-4 mt-16 bg-slate-200 lg:flex lg:justify-evenly">
-        <div className="p-2 flex justify-center">
+    <div className="grid w-full grid-cols-2 gap-4 mt-16 bg-slate-200 sm:grid-cols-2 lg:flex lg:justify-evenly">
+        <div className="flex justify-center p-2">
             <BotonMenu title={"Añadir"} image={"/AddUseer.png"} onClick={handlerClickA} />
         </div>
-        <div className="p-2 flex justify-center">
+        <div className="flex justify-center p-2">
             <BotonMenu title={"Visualizar"} image={"/users.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="p-2 flex justify-center">
+        <div className="flex justify-center p-2">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
-        <div className="p-2 flex justify-center">
+        <div className="flex justify-center p-2">
             <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
         </div>
     </div>
 </div>
+
 
     );
 }

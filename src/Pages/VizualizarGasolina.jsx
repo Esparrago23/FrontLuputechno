@@ -90,18 +90,17 @@ function VizualizarGasolina() {
 
 
     return (
-        <div >
-            <Navbar></Navbar>
-            <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+        <div>
+  <Navbar />
+  <div className="flex mt-16 bg-slate-200 justify-evenly max-sm:grid max-sm:gap-4 sm:grid-cols-2">
+    <BotonMenu title={"Mostrar"} image={"/Gasolina.png"} onClick={handlerClickM} />
+    <BotonMenu title={"Buscar"} image={"/Gasolina.png"} onClick={handlerClick} />
+  </div>
+  <div className="overflow-x-auto">
+    <Table columns={columns} data={vehicles} />
+  </div>
+</div>
 
-            <BotonMenu title={"Mostrar"} image={"/Gasolina.png"} onClick={handlerClickM} />
-            <BotonMenu title={"Buscar"} image={"/Gasolina.png"} onClick={handlerClick} />
-            </div>
-            <div className='overflow-x-auto'>
-
-            <Table columns={columns} data={vehicles} />
-            </div>
-        </div>
     );
 }
 

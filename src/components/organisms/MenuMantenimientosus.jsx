@@ -189,23 +189,26 @@ function MenuMantenimientosus() {
     <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="grid grid-cols-2 gap-4 mt-16 sm:flex sm:justify-evenly bg-slate-200">
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Añadir"} image={"/Papel2.png"} onClick={handlerClickA} />
+        <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
+            <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
         </div>
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Visualizar"} image={"/Papel.png"} onClick={NavigateToVizualizar} />
-        </div>
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
-        </div>
-        <div className="col-span-1 sm:mb-0">
-            <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
+        <div className="grid grid-cols-2 gap-4 mt-16 sm:flex sm:justify-evenly bg-slate-200">
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Añadir"} image={"/Papel2.png"} onClick={handlerClickA} />
+            </div>
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Visualizar"} image={"/Papel.png"} onClick={NavigateToVizualizar} />
+            </div>
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
+            </div>
+            <div className="col-span-1 sm:mb-0">
+                <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
+            </div>
         </div>
     </div>
-</div>
 
-  )
+    )
 }
 
 export default MenuMantenimientosus

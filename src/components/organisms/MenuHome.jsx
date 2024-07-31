@@ -13,7 +13,6 @@ function MenuHome() {
 
     return (
 <div className="mt-16">
-<div className="mt-16">
     <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
@@ -36,10 +35,6 @@ function MenuHome() {
         </div>
     </div>
 </div>
-
-</div>
-
-
     )
 }
 

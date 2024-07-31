@@ -11,10 +11,9 @@ function FormularioUsuariosEditar({ onChange, data }) {
         roles: data.roles,
         created_at: data.created_at,
     });
-
-    useEffect(() => {
-        onChange(formValues);
-    }, [formValues, onChange]);
+		useEffect(() => {
+			onChange(formValues);
+		}, [formValues, onChange]);
 
     const handleChange = (name, value) => {
         const positiveNumberRegex = /^[1-9]\d*$/;

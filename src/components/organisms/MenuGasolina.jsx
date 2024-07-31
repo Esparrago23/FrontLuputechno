@@ -205,28 +205,23 @@ function MenuGasolina() {
 };
 
     return (
-        <div className="mt-16">
+        <div>
     <div className="mb-4 text-xl text-center bg-slate-200 sm:text-2xl md:text-3xl lg:text-4xl text-stone-950">
         <Label className="m-2 font-bold" text="¡LISTO PARA TRABAJAR!" />
     </div>
-    <div className="grid grid-cols-1 sm:grid-cols-2 mt-16 bg-slate-200 lg:flex lg:justify-center gap-4  p-4 w-full">
-        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
+    <div className="grid w-full grid-cols-1 gap-4 p-4 mt-16 sm:grid-cols-2 bg-slate-200 lg:flex lg:justify-center">
+        <div className="w-full p-2 mx-auto sm:w-1/2 md:-1/3 lg:w-auto">
             <BotonMenu title={"Añadir"} image={"/Gasolina.png"} onClick={handlerClickA} />
         </div>
-        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
+        <div className="w-full p-2 mx-auto sm:w-1/2 md:-1/3 lg:w-auto">
             <BotonMenu title={"Visualizar"} image={"/Gasolina.png"} onClick={NavigateToVizualizar} />
         </div>
-        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
+        <div className="w-full p-2 mx-auto sm:w-1/2 md:-1/3 lg:w-auto">
             <BotonMenu title={"Editar"} image={"/pen-svgrepo-com(2).svg"} onClick={handlerClickE} />
         </div>
-        <div className="w-full sm:w-1/2 md:-1/3 lg:w-auto mx-auto p-2">
-            <BotonMenu title={"Eliminar"} image={"/trash-xmark-svgrepo-com.svg"} onClick={handlerClick} />
-        </div>
-    </div>
 </div>
-
-
-
+</div>
+    
     );
 }
 
